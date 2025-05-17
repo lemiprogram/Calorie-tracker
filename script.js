@@ -1,4 +1,4 @@
-const documentVariables = {
+const docVariables = {
     btns:{
         addCalorieInpBtn:document.querySelector("#addCalorieInpBtn"),
         addFoodInpBtn:document.querySelector("#addFoodInpBtn"),
@@ -36,3 +36,26 @@ const documentVariables = {
     }
 }
 
+const docFunctions = {
+    //addinp ~ this function adds an input field.
+        // The section para is the location of the input field.
+        // The isSet para dictates whether the inp overwrites the innerHTML or if it is just concatenated into the section
+        // The labelText para is the text within the label.
+        // The type para is the type of input field it is.
+    addInp:(section,isSet=false, labelText = "", type ="text")=>{
+        inp = document.createElement("div")
+        inp.innerHtml = `
+            <label >${labelText}</label>
+            <input type="${type}">
+
+        `
+        if(isSet){
+            section.innerHtml = inp
+        }
+        else{
+            section.appendChild(inp)
+        }
+    },
+    
+
+}
