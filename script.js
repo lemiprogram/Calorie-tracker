@@ -56,6 +56,9 @@ const docFunctions = {
             section.appendChild(inp)
         }
     },
-    
+    //removeEl ~ removes elements from the document
+        // The el para this the element of choice
+    removeEl:el=>el.remove()
+    //
 
 }
