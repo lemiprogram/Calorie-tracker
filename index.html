@@ -4,9 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css
+    ">
+    <style type="text/tailwindcss">
+        @theme {
+            --color-primary-100:#2C3E50;
+            --color-primary-200:#57687c;
+            --color-primary-300:#b4c7dd;
+            --color-accent-100:#F7CAC9;
+            --color-accent-200:#926b6a;
+            --color-text-100:#333333;
+            --color-text-200:#5c5c5c;
+            --color-bg-100:#F2F2F2;
+            --color-bg-200:#e8e8e8;
+            --color-bg-300:#bfbfbf;
+      
+        }
+    </style>
 </head>
-<body>
+<body class="text-text-100">
+    <div id="inpInfoModal" class="flex justify-center items-center w-[100vw] h-[100vh] gap-3">
+        <div id="inpInfoSection" class="flex flex-col bg-bg-100 min-w-[400px] min-h-[580px] max-w-[500px] sm:grow rounded-3xl ">
+            <div class="foodSection border-b-3 ">
+                <div class="heading">Add the amount of calories consumed by this meal</div>
+                <div id="foodInpSection"></div>
+                <div class="flex justify-end"><button id="addFoodInpBtn" class="btn rounded-full grid place-content-center w-[120px] bg-primary-100 text-bg-100 ">Add a food</button></div>
+
+            </div>
+            <div class="exerciseSection border-b-3 ">
+                <div class="heading">Add the amount of calories consumed by this meal</div>
+                <div id="exerciseInpSection"></div>
+                <div class="flex justify-end"><button id="addExerciseInpBtn" class="btn rounded-full grid place-content-center w-[120px] bg-primary-100 text-bg-100 ">Add a food</button></div>
+
+            </div>
+            <div class="flex justify-center"><button id="addInfoBtn" class="rounded-full btn text-bg-100 bg-primary-100 ">Add</button></div>
+    </div>
+    
+</div>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="script.js"></script>
+    
 </body>
 </html>
