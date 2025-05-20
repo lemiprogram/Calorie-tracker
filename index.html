@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css
-    ">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="styles.css
+        ">
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <style type="text/tailwindcss">
         @theme {
             --color-primary-100:#2C3E50;
@@ -23,25 +24,43 @@
     </style>
 </head>
 <body class="text-text-100">
-    <div id="inpInfoModal" class="flex justify-center items-center w-[100vw] min-h-[100vh] gap-3">
+    <div id="inpInfoModal" class=" flex justify-center items-center w-[100vw] min-h-[100vh] gap-3">
         <div id="inpInfoSection" class="bg-bg-100 min-w-[400px] min-h-[580px] max-w-[500px] sm:grow shrink rounded-3xl ">
             <div class="foodSection border-b-3 ">
                 <div class="heading">Add the amount of calories Consumed and the meal</div>
-                <div id="foodInpSection"></div>
-                <div class="flex justify-end"><button id="addFoodInpBtn" class="btn rounded-full grid place-content-center w-[120px] bg-primary-100 text-bg-100 ">Add a food</button></div>
+                <div id="foodInpSection" class="inpInfoSection"></div>
+                <div class="flex justify-end"><button id="addFoodInpBtn" class="btn rounded-full grid place-content-center w-[120px] bg-primary-100 text-bg-100 ">Add</button></div>
 
             </div>
-            <div class="exerciseSection border-b-3 ">
-                <div class="heading">Add the amount of calories Burned and the Exercise</div>
-                <div id="exerciseInpSection"></div>
-                <div class="flex justify-end"><button id="addExerciseInpBtn" class="btn rounded-full grid place-content-center w-[120px] bg-primary-100 text-bg-100 ">Add a food</button></div>
-
-            </div>
+            
             <div class="flex justify-center"><button id="addInfoBtn" class="rounded-full btn text-bg-100 bg-primary-100 ">Add</button></div>
     </div>
     
 </div>
+    <main class="flex flex-col">
+        <div class="daily-cards flex justify-center bg-bg-100 md:bg-bg-200 w-full gap-5">
+            <div class="card surplus-card bg-bg-100 border-l-4 border-l-green-600">
+                <div class="heading text-green-600 ">Surplus</div>
+                <div class="para text-text-200"><span class="surplus-val text-text-100">0.00</span>cal</div>
+            </div>
+            <div class="card deficit-card bg-bg-100 border-l-4 border-l-red-600">
+                <div class="heading text-red-600">Deficit</div>
+                <div class="para text-text-200"><span class="deficit-val text-text-100">0.00</span>cal</div>
+            </div>
+        </div>
+        <div class="daily-inps">
+            <table class="border-collapse">
+                <tr>
+                    <th>Date</th>
+                    <th></th>
+                    <th>Date</th>
+                    <th>Date</th>
+                </tr>
+            </table>
+        </div>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	<script src="test.js"></script>
     <script src="script.js"></script>
     
 </body>

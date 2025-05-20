@@ -56,3 +56,27 @@ input{
         padding:10px 20px;
     }
 }
+.daily-cards{
+    padding: 20px;
+}
+.daily-cards .card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    height: 150px;
+    border-radius: 10px;
+    flex-shrink: 1;
+    padding: 20px;
+    box-shadow: 1px 1px 6px 0 ;
+}
+.daily-cards .card .heading{
+    font-weight: 700;
+    font-size: 2em;
+}
+.daily-cards .card .para{
+    font-size:1.5em
+}
+.daily-cards .card span{
+    font-size:1.5em
+}
