@@ -144,8 +144,7 @@ const toggleMyClassFunc =(myClass,el1)=>{
 }
 
 function  calcSurplus  (arr=allTimeCalorieArr){ 
-  const caloriesArr = arr.map(obj=>obj.calories)
-  console.log(caloriesArr)
+  return  arr.map(obj=>obj.calories).reduce((acc,item)=>acc+item,0)
 }
 
 const {btns,inps,sections,values} = docVariables;
@@ -178,5 +177,6 @@ btns.addInfoBtn.addEventListener("click",()=>{
 
     }
     renderPage()
+
   })
 })
