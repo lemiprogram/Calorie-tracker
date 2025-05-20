@@ -46,8 +46,16 @@ const docVariables = {
 const allTimeCalorieArr = []
 
 const renderPage = ()=>{
-  console.log(calcSurplus())
-  document.querySelector(".surplus-val").innerHTML = `${calcSurplus()}`
+  const surplus = calcSurplus()
+  document.querySelector(".surplus-val").innerHTML = `${surplus}`
+  document.querySelector("table tBody").innerHTML = allTimeCalorieArr.map(item=>`
+     <tr>
+       <td>${item.type}</td>
+       <td>${item.calories}</td>
+       <td>${item.date}</td>
+       <td><div class="delete-item btn" id="item-${item.id}" onclick="deleteItem(this)">Delete</div></td>
+     </tr> 
+    `).join("")
 }
 //addinp ~ this function adds an input field.
 // The section para is the location of the input field.
@@ -91,7 +99,7 @@ const addArrInfoFunc = async (type,isConsumed = true, arr=allTimeCalorieArr) =>{
     })
     console.log(arr)
   }
-const fetchCalories = async (food,arr,index) =>{
+const fetchCalories = async (food) =>{
   let app_id = "ddf014be"
   let app_key = "f35771cece48e274bd22c8b349377f51"
   let calories
@@ -144,9 +152,16 @@ const toggleMyClassFunc =(myClass,el1)=>{
 }
 
 function  calcSurplus  (arr=allTimeCalorieArr){ 
-  return  arr.map(obj=>obj.calories).reduce((acc,item)=>acc+item,0)
+  const calories = arr.map(obj=>obj.calories)
+  return calories.reduce((acc,item)=>acc+item,0)
 }
+function deleteItem(e){
 
+  console.log(Number(e.target.id.splice(0,5)))
+}
+function closeModal(){
+  toggleMyClassFunc("hidden",inpInfoModal)
+}
 const {btns,inps,sections,values} = docVariables;
 
 btns.addFoodInpBtn.addEventListener("click",e=>{
@@ -164,16 +179,7 @@ btns.addInfoBtn.addEventListener("click",()=>{
       const [type] = item.querySelectorAll("input");
       addArrInfoFunc(type.value)
       toggleMyClassFunc("hidden",inpInfoModal) 
-      inpInfoModal.innerHTML = `<div id="inpInfoSection" class="bg-bg-100 min-w-[400px] min-h-[580px] max-w-[500px] sm:grow shrink rounded-3xl ">
-            <div class="foodSection border-b-3 ">
-                <div class="heading">Add the amount of calories Consumed and the meal</div>
-                <div id="foodInpSection" class="inpInfoSection"></div>
-                <div class="flex justify-end"><button id="addFoodInpBtn" class="btn rounded-full grid place-content-center w-[120px] bg-primary-100 text-bg-100 ">Add</button></div>
-
-            </div>
-            
-            <div class="flex justify-center"><button id="addInfoBtn" class="rounded-full btn text-bg-100 bg-primary-100 ">Add</button></div>
-    </div>`
+      foodInpSection.innerHTML = ``
 
     }
     renderPage()
