@@ -54,7 +54,7 @@ const renderPage = ()=>{
      <tr>
        <td>${item.type}</td>
        <td>${item.calories}</td>
-       <td><div class="delete-item btn" id="item-${item.id}" onclick="deleteItem(this)">Delete</div></td>
+       <td><div class="delete-item btn rounded-full bg-primary-100 text-bg-100" id="item-${item.id}" onclick="deleteItem(this)">Delete</div></td>
      </tr> 
     `).join("")
 }
@@ -70,7 +70,7 @@ const addInpFunc = (section, isSet = false,labelText = "", pHolder1="food", type
             <label className="text-text-200" >${labelText}</label>
             <input type="${type}" class="${pHolder1}" placeholder="${pHolder1}">
             ${pHolder1!=="food"?'<input type="${type}" class="calories" placeholder="Calories">':''}
-            <div class="deleteCalorieInpBtn">X</div>
+            <div class="deleteCalorieInpBtn ">X</div>
             <p class="text-red-600"></p>
 
         `;
