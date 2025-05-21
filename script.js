@@ -43,6 +43,8 @@ const docVariables = {
     caloriesToKg:7700,
   }
 };
+  !localStorage.getItem("calorieArr")?localStorage.setItem("calorieArr",JSON.stringify([])):console.log(JSON.parse(localStorage.getItem("calorieArr")))
+
 const allTimeCalorieArr = []
 
 const renderPage = ()=>{
@@ -52,7 +54,6 @@ const renderPage = ()=>{
      <tr>
        <td>${item.type}</td>
        <td>${item.calories}</td>
-       <td>${item.date}</td>
        <td><div class="delete-item btn" id="item-${item.id}" onclick="deleteItem(this)">Delete</div></td>
      </tr> 
     `).join("")
@@ -89,7 +90,8 @@ const removeElFunc = (el) => el.remove()
 //The arr para is the array that will receive the values
 const addArrInfoFunc = async (type,isConsumed = true, arr=allTimeCalorieArr) =>{
     const res = fetchCalories(type,arr,arr.length)
-    const calories = await res.then( data=>data.parsed[0].food.nutrients.ENERC_KCAL)
+    const calories = await res.then(data=>data.items[0].calories)
+
     arr.push({
       id: arr.length,
       date: new Date(),
@@ -100,26 +102,21 @@ const addArrInfoFunc = async (type,isConsumed = true, arr=allTimeCalorieArr) =>{
     console.log(arr)
   }
 const fetchCalories = async (food) =>{
-  let app_id = "ddf014be"
-  let app_key = "f35771cece48e274bd22c8b349377f51"
-  let calories
-  const apiUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=${app_id}&app_key=${app_key}&ingr=${encodeURIComponent(food)}&nutrition-type=cooking`
-  return  await fetch(apiUrl)
-      .then(response => {
-          console.log(response.status)
-              if (!response.ok) {
-                  throw new Error('Network response was not ok');
-              }
-              
-              return response.json();
-          })
-      .catch(error => {
-
-          console.error(`There was a problem with
-                        the fetch operation:`, error);
-      });
-
-}
+  const apiUrl = 'https://api.calorieninjas.com/v1/nutrition?query=' + encodeURIComponent(food)
+    const apikey = "YADsPSTNERVw1KAv8GMB5A==sPBTa5zAqiRZ451r"
+    return await fetch(apiUrl,{
+        method: 'GET',
+        headers: { 'X-Api-Key': `${apikey}`},
+        contentType: 'application/json',
+     })
+    .then(res=>{
+        if(!res.ok){
+            console.log("This is the issue:")
+        }
+        return res.json()
+    })
+    .catch(err=>console.error(err))
+  }
 // removeArrInfo ~ removes info from an array
 // The arr para is the array 
 // The index para is the index of the item to be removed 
@@ -159,8 +156,9 @@ function deleteItem(e){
 
   console.log(Number(e.target.id.splice(0,5)))
 }
-function closeModal(){
+function showModal(){
   toggleMyClassFunc("hidden",inpInfoModal)
+  
 }
 const {btns,inps,sections,values} = docVariables;
 
@@ -176,13 +174,18 @@ btns.addInfoBtn.addEventListener("click",()=>{
   const infoInps  = Array.from(sections.inpInfoSection)
   infoInps.forEach((inp)=>{
     for(item of inp.children){
-      const [type] = item.querySelectorAll("input");
+      const type = item.querySelector("input");
       addArrInfoFunc(type.value)
-      toggleMyClassFunc("hidden",inpInfoModal) 
-      foodInpSection.innerHTML = ``
-
+      
     }
+    foodInpSection.innerHTML = ``
+    toggleMyClassFunc("hidden",inpInfoModal) 
     renderPage()
 
   })
 })
+window.onclick = event=>{
+  if(event.target === inpInfoModal){
+    showModal()
+  }
+}

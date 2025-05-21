@@ -24,9 +24,9 @@
     </style>
 </head>
 <body class="text-text-100">
-    <div id="inpInfoModal" class=" flex justify-center items-center w-[100vw] min-h-[100vh] gap-3 fixed">
+    <div id="inpInfoModal" class=" z-10 hidden flex justify-center items-center w-[100vw] min-h-[100vh] gap-3 fixed">
         <div id="inpInfoSection" class="relative bg-bg-100 min-w-[400px] h-[600px] max-w-[500px] sm:grow shrink rounded-3xl ">
-            <div class="closeModal absolute top-1 right-3" onclick="closeModal()">x</div>
+            <div class="closeModal absolute top-1 right-3" onclick="showModal()">x</div>
             <div class="foodSection border-b-3 ">
                 <div class="heading">Add the amount of calories Consumed and the meal</div>
                 <div id="foodInpSection" class="inpInfoSection"></div>
@@ -49,13 +49,13 @@
                 <div class="para text-text-200"><span class="deficit-val text-text-100"></span>cal</div>
             </div> -->
         </div>
-        <div class="daily-inps flex justify-center">
+        <div class="relative daily-inps flex justify-center ">
+            <button class="fixed bottom-3 right-3 rounded-full btn bg-primary-100 text-bg-100" onclick="showModal()">Add a food</button>
             <table class="border-collapse">
                 <tHead>
                     <tr>
                         <th>Food</th>
                         <th>Calories</th>
-                        <th>Date</th>
                         <th></th>
                     </tr>
                 </tHead>
