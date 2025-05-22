@@ -45,9 +45,10 @@ const docVariables = {
 };
   !localStorage.getItem("calorieArr")?localStorage.setItem("calorieArr",JSON.stringify([])):console.log(JSON.parse(localStorage.getItem("calorieArr")))
 
-const allTimeCalorieArr = []
+const allTimeCalorieArr = JSON.parse(localStorage.getItem("calorieArr"))
 
 const renderPage = ()=>{
+  localStorage.setItem("calorieArr",JSON.stringify(allTimeCalorieArr))
   const surplus = calcSurplus()
   document.querySelector(".surplus-val").innerHTML = `${surplus}`
   document.querySelector("table tBody").innerHTML = allTimeCalorieArr.map(item=>`
@@ -99,6 +100,7 @@ const addArrInfoFunc = async (type,isConsumed = true, arr=allTimeCalorieArr) =>{
       isConsumed,
       calories
     })
+    renderPage()
     console.log(arr)
   }
 const fetchCalories = async (food) =>{
@@ -111,9 +113,10 @@ const fetchCalories = async (food) =>{
      })
     .then(res=>{
         if(!res.ok){
-            console.log("This is the issue:")
+          console.log("This is the issue:")
         }
         return res.json()
+        // myClass para is the class given to the 
     })
     .catch(err=>console.error(err))
   }
@@ -142,7 +145,6 @@ const addArrPersonalInfoFunc =(name,dob,height,weight)=>{
 }
 //toggleMyClass~ toggles through a class on the el1 and el2 elements
 //el1 and el2 are parameteres representing two seperate elements
-// myClass para is the class given to the 
 
 const toggleMyClassFunc =(myClass,el1)=>{
     el1.classList.toggle(myClass)
@@ -153,12 +155,17 @@ function  calcSurplus  (arr=allTimeCalorieArr){
   return calories.reduce((acc,item)=>acc+item,0)
 }
 function deleteItem(e){
-
-  console.log(Number(e.target.id.splice(0,5)))
+  const index = Number(e.id.slice(5))
+  allTimeCalorieArr.length>1?allTimeCalorieArr.splice(index,1):allTimeCalorieArr.pop()
+  renderPage()
 }
 function showModal(){
   toggleMyClassFunc("hidden",inpInfoModal)
   
+}
+function resetArr(arr){
+  arr =[]
+  renderPage()
 }
 const {btns,inps,sections,values} = docVariables;
 
@@ -180,7 +187,6 @@ btns.addInfoBtn.addEventListener("click",()=>{
     }
     foodInpSection.innerHTML = ``
     toggleMyClassFunc("hidden",inpInfoModal) 
-    renderPage()
 
   })
 })
@@ -189,3 +195,4 @@ window.onclick = event=>{
     showModal()
   }
 }
+renderPage()
